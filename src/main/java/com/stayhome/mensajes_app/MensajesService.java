@@ -3,7 +3,7 @@ package com.stayhome.mensajes_app;
 import java.util.Scanner;
 
 public class MensajesService {
-
+    
     public static void crearMensaje(){
         Scanner sc = new Scanner(System.in);
 
@@ -17,6 +17,7 @@ public class MensajesService {
         registro.setMensaje(mensaje);
         registro.setAutorMensaje(nombre);
 
+        //Enviamos la informacion a la capa DAO
         MensajesDAO.crearMensajeDB(registro);
     }
 
