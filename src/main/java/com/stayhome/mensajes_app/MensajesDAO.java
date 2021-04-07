@@ -92,6 +92,31 @@ public class MensajesDAO {
     }
 
     public static void actualizarMensajeDB(Mensajes mensaje){
+        //Se invoca el objeto Conexion
+        Conexion dbConnect = new Conexion();
 
+        //Nos conectamos a la BD
+        try (Connection conexion = dbConnect.get_connection()){
+
+            PreparedStatement ps = null;
+
+            try {
+
+                String query =  "UPDATE mensajes SET mensaje = ? WHERE id_mensaje = ? ";
+                ps = conexion.prepareStatement(query);
+                ps.setString(1, mensaje.getMensaje());
+                ps.setInt(2, mensaje.getId_mensaje());
+                ps.executeUpdate();
+                System.out.println("El mensaje fue editado con exito");
+
+            } catch (SQLException ex){
+                System.out.println(ex);
+                System.out.println("No se pudo actualizar el mensaje");
+            }
+
+        //Mostramos la excepcion si es que no nos podemos conectar a la BD
+        } catch (SQLException e){
+            System.out.println(e);
+        }
     }
 }
