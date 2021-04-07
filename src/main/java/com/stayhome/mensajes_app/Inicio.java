@@ -32,7 +32,7 @@ public class Inicio {
             //leemos la opcion del usuario
             opcion = sc.nextInt();
 
-            switch (opcion){1
+            switch (opcion){
 
                 case 1:
                     MensajesService.crearMensaje();
