@@ -25,7 +25,16 @@ public class MensajesService {
         MensajesDAO.leerMensajesDB();
     }
 
-    public static void borrarMensaje(){}
+    public static void borrarMensaje(){
+        //Damos lectura a la insercion por medio de teclado
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Escribe el Id del mensaje que deseas borrar");
+        Integer id = sc.nextInt();
+
+        //Enviamos la informacion a la capa DAO
+        MensajesDAO.borrarMensajeDB(id);
+    }
 
     public static void editarMensaje(){}
 

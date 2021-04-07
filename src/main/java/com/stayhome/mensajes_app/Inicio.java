@@ -32,7 +32,8 @@ public class Inicio {
             //leemos la opcion del usuario
             opcion = sc.nextInt();
 
-            switch (opcion){
+            switch (opcion){1
+
                 case 1:
                     MensajesService.crearMensaje();
                     break;
@@ -40,10 +41,10 @@ public class Inicio {
                     MensajesService.listarMensajes();
                     break;
                 case 3:
-                    MensajesService.borrarMensaje();
+                    MensajesService.editarMensaje();
                     break;
                 case 4:
-                    MensajesService.editarMensaje();
+                    MensajesService.borrarMensaje();
                     break;
                 default:
                     break;

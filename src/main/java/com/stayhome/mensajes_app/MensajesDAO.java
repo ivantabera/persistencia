@@ -59,12 +59,36 @@ public class MensajesDAO {
 
         //Mostramos la excepcion si es que no nos podemos conectar a la BD
         } catch (SQLException e){
+            System.out.println("No se pudieron recuperar los mensajes");
             System.out.println(e);
         }
     }
 
     public static void borrarMensajeDB(int id_mensaje){
+        //Se invoca el objeto Conexion
+        Conexion dbConnect = new Conexion();
 
+        //Nos conectamos a la BD
+        try (Connection conexion = dbConnect.get_connection()){
+
+            PreparedStatement ps = null;
+
+            try {
+
+                String query =  "DELETE FROM mensajes WHERE id_mensaje  = ? ";
+                ps = conexion.prepareStatement(query);
+                ps.setInt(1, id_mensaje);
+                ps.executeUpdate();
+                System.out.println("El mensaje fue borrado con exito");
+
+            } catch (SQLException ex){
+                System.out.println(ex);
+            }
+
+        //Mostramos la excepcion si es que no nos podemos conectar a la BD
+        } catch (SQLException e){
+            System.out.println(e);
+        }
     }
 
     public static void actualizarMensajeDB(Mensajes mensaje){
