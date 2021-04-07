@@ -2,6 +2,7 @@ package com.stayhome.mensajes_app;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class MensajesDAO {
@@ -37,7 +38,29 @@ public class MensajesDAO {
     }
 
     public static void leerMensajesDB(){
+        //Se invoca el objeto Conexion
+        Conexion dbConnect = new Conexion();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
 
+        //Nos conectamos a la BD
+        try (Connection conexion = dbConnect.get_connection()){
+            String query = "Select * from mensajes";
+            ps = conexion.prepareStatement(query);
+            rs = ps.executeQuery();
+
+            while (rs.next()){
+                System.out.println("ID: " + rs.getInt("id_mensaje") );
+                System.out.println("Mensaje: " + rs.getString("mensaje"));
+                System.out.println("Autor: " + rs.getString("autor_mensaje"));
+                System.out.println("Fecha: " + rs.getString("fecha"));
+                System.out.println("");
+            }
+
+        //Mostramos la excepcion si es que no nos podemos conectar a la BD
+        } catch (SQLException e){
+            System.out.println(e);
+        }
     }
 
     public static void borrarMensajeDB(int id_mensaje){
